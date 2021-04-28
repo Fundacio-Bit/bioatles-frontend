@@ -53,9 +53,68 @@ function App() {
         geometry: point,
         symbol: simpleMarkerSymbol,
       });
-      // Add graphic when GraphicsLayer is constructed
+
+      // Create a line geometry
+      const polyline = {
+        type: "polyline",
+        paths: [
+          [2.81898, 39.470204], //Longitude, latitude
+          [2.71898, 39.510104], //Longitude, latitude
+          [2.41888, 39.420004], //Longitude, latitude
+        ],
+      };
+      const simpleLineSymbol = {
+        type: "simple-line",
+        color: [226, 119, 40], // Orange
+        width: 2,
+      };
+
+      const polylineGraphic = new Graphic({
+        geometry: polyline,
+        symbol: simpleLineSymbol,
+      });
+
+      // Create a filled polygon
+      const polygon = {
+        type: "polygon",
+        rings: [
+          [3.1077163, 39.813113], //Longitude, latitude
+          [3.1077163, 39.803113], //Longitude, latitude
+          [3.0977163, 39.803113], //Longitude, latitude
+          [3.0977163, 39.813113], //Longitude, latitude
+        ],
+      };
+
+      // add a pop-up to the polygon
+
+      const popupTemplate = {
+        title: "{Name}",
+        content: "{Description}",
+      };
+      const attributes = {
+        Name: "Albufera de Mallorca",
+        Description: "Cuadrícula 310",
+      };
+
+      const simpleFillSymbol = {
+        type: "simple-fill",
+        color: [227, 139, 79, 0.8], // Orange, opacity 80%
+        outline: {
+          color: [255, 255, 255],
+          width: 1,
+        },
+      };
+
+      const polygonGraphic = new Graphic({
+        geometry: polygon,
+        symbol: simpleFillSymbol,
+        attributes: attributes,
+        popupTemplate: popupTemplate,
+      });
+
+      // Add graphics when GraphicsLayer is constructed
       const graphicsLayer = new GraphicsLayer({
-        graphics: [pointGraphic],
+        graphics: [pointGraphic, polylineGraphic, polygonGraphic],
       });
 
       webmap.add(graphicsLayer);
