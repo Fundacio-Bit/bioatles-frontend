@@ -32,17 +32,32 @@ class Map extends Component {
           container: "mapDiv",
         });
 
+        // view.on("click", function (event) {
+        //   alert(
+        //     "User clicked at " +
+        //       event.screenPoint.x +
+        //       ", " +
+        //       event.screenPoint.y +
+        //       " on the screen. The map coordinate at this point is " +
+        //       event.mapPoint.x +
+        //       ", " +
+        //       event.mapPoint.y
+        //   );
+        // });
+
         view.on("click", function (event) {
-          alert(
-            "User clicked at " +
-              event.screenPoint.x +
-              ", " +
-              event.screenPoint.y +
-              " on the screen. The map coordinate at this point is " +
-              event.mapPoint.x +
-              ", " +
-              event.mapPoint.y
+          console.log(
+            "CLICK",
+            view.allLayerViews.items.map((item) => item.layer.id)
           );
+          console.log("layerViews", view.layerViews.items);
+          // view.hitTest(event).then(function (response) {
+          //   console.log(response);
+          //   // check if a feature is returned
+          //   if (response.results.length) {
+          //     console.log(response.results[0].graphic);
+          //   }
+          // });
         });
 
         // ########## Search widget ##############
