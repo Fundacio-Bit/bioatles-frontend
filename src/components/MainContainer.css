@@ -22,6 +22,12 @@
 .rightcol {
   height: 800px;
 }
+.esri-popup {
+  visibility: hidden;
+}
+.esri-spinner {
+  visibility: hidden;
+}
 
 #mapDiv {
   padding: 0;
