@@ -1,1 +1,26 @@
-{ "893": ["Buffo buffotes", "Buffo viridis"] }
+{
+  "893": {
+    "species": ["Alytes muletensis", "Buffo buffotes"],
+    "polygon": {
+      "type": "polygon",
+      "rings": [
+        [1.1554, 38.8794],
+        [1.2134, 38.8798],
+        [1.2134, 38.835],
+        [1.1554, 38.835]
+      ]
+    }
+  },
+  "894": {
+    "species": ["Buffo buffotes", "Buffo viridis"],
+    "polygon": {
+      "type": "polygon",
+      "rings": [
+        [1.27, 38.8809],
+        [1.2134, 38.8798],
+        [1.2134, 38.835],
+        [1.27, 38.835]
+      ]
+    }
+  }
+}

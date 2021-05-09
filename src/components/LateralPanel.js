@@ -1,22 +1,26 @@
 import React from "react";
-import data from "../data/dummyTileData.json";
 import { EyeOutlined } from "@ant-design/icons";
 
 function LateralPanel(props) {
-  const lines =
-    props.tile && props.tile in data
-      ? data[props.tile].map((species, index) => (
-          <div style={{ margin: 5 }}>
+  console.log("MySpecies", props.displayedSpecies);
+  return (
+    <div>
+      {props.displayedSpecies &&
+        props.displayedSpecies.map((species) => (
+          <div
+            key={species.toLowerCase().replace(/\s/g, "_")}
+            style={{ margin: 5 }}
+          >
             {" "}
             {species}
             <EyeOutlined
               style={{ margin: 5 }}
-              onClick={() => props.speciesChangeHandler(index)}
+              onClick={() => props.eventEmitter.emit("message", species)}
             ></EyeOutlined>
           </div>
-        ))
-      : null;
-  return <div>{lines}</div>;
+        ))}
+    </div>
+  );
 }
 
 export default LateralPanel;

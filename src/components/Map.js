@@ -1,12 +1,14 @@
 import React, { useRef, useEffect } from "react";
-// import Bookmarks from "@arcgis/core/widgets/Bookmarks";
-// import Expand from "@arcgis/core/widgets/Expand";
 import MapView from "@arcgis/core/views/MapView";
 import WebMap from "@arcgis/core/WebMap";
 import Search from "@arcgis/core/widgets/Search";
 import GraphicsLayer from "@arcgis/core/layers/GraphicsLayer";
+import tileData from "../data/dummyTileData.json";
+import speciesData from "../data/dummySpeciesData.json";
 
-// TODO: avoid rerendering
+// THE ARCGIS BASE MAP SHOULD IMPLEMENT ALL THE REQUIRED FUNCTIONALITY
+// IT WILL COMUNNICATE VIA EVENTS (EVENT EMITTER) WITH THE REACT PARENT AND SIBLINGS
+// STATE SHOULD NOT BE MODIFIED: IT WOULD PRODUCE MAP RERENDERINGS AND THUS A BAD USER EXPERIENCE
 // https://stackoverflow.com/questions/62619741/update-state-without-re-rendering-arcgis-map
 
 function Map(props) {
@@ -31,54 +33,29 @@ function Map(props) {
       const view = new MapView({
         container: mapDiv.current,
         map: webmap,
-        zoom: 2,
+        zoom: props.viewZoom,
+        extent: props.viewExtent,
       });
 
-      var gra = {};
-
-      gra.geometry = props.polygon;
-      gra.symbol = {
-        type: "simple-fill", // autocasts as new SimpleFillSymbol()
-        color: "#039962",
-      };
-
-      // Add graphics when GraphicsLayer is constructed
-      var graphicsLayer = new GraphicsLayer({
-        // graphics: [pointGraphic, polylineGraphic, polygonGraphic, gra],
-        graphics: [gra],
-      });
+      // ################# INITIALIZE GRAPHICS LAYER ##############
+      // it mus exist for later interaction
+      var graphicsLayer = new GraphicsLayer({ graphics: null });
 
       webmap.add(graphicsLayer);
-      console.log(
-        "PreColor",
-        webmap.allLayers.items[0].graphics.items[0].symbol.color
-      );
 
       // ################# MAP INTERACTION ################
       // Manage click events. Get grid tile id on click.
-      console.log("PreView", view);
 
       view.on("click", function (event) {
-        // webmap.allLayers.items[1].graphics.items[0].symbol.color = "#756282";
-        // console.log(
-        //   "PostColor",
-        //   webmap.allLayers.items[1].graphics.items[0].symbol.color
-        // );
-
-        webmap.remove(graphicsLayer);
-
-        gra.symbol.color = "#756282";
-        var updatedGgraphicsLayer = new GraphicsLayer({
-          // graphics: [pointGraphic, polylineGraphic, polygonGraphic, gra],
-          graphics: [gra],
-        });
-        webmap.add(updatedGgraphicsLayer);
+        console.log("Zoom level", view.zoom, view.extent);
+        props.zoomChangeHandler(view.zoom);
+        props.extentChangeHandler(view.extent);
 
         //  get the layer that contains the features
         // it contains two sublayers in a list 0 --> 1x1 and 1 --> 5 x 5
         const mallas = webmap.findLayerById("GOIB_DistEspecies_IB_9660");
 
-        // this function makes a query to the 1x1 feature layer
+        // this function makes a query to the 5x5 feature layer
         // uses a screen point (ccordinates) retrieved via click. It is intersected with the features to know
         // which one is found at that point.
         // The attributes of this feature contain the information required (i.e. the grid tile number)
@@ -92,8 +69,22 @@ function Map(props) {
               outFields: ["*"],
             })
             .then((featureSet) => {
-              // view.graphics.removeAll();
-              console.log("Feature", featureSet.features[0]);
+              console.log("Webmap pre", webmap);
+              var gra = {};
+              gra.geometry =
+                tileData[featureSet.features[0].attributes["Q_CODI"]].polygon;
+              gra.symbol = {
+                type: "simple-fill", // autocasts as new SimpleFillSymbol()
+                color: "#039962",
+              };
+
+              // Add graphics when GraphicsLayer is constructed
+              graphicsLayer.removeAll();
+              graphicsLayer.add(gra);
+
+              props.displayedSpeciesChangeHandler(
+                tileData[featureSet.features[0].attributes["Q_CODI"]].species
+              );
 
               props.tileChangeHandler(
                 featureSet.features[0].attributes["Q_CODI"]
@@ -103,14 +94,32 @@ function Map(props) {
         }
 
         view.hitTest(event).then(function (response) {
-          console.log(response);
-
           // check if a feature is returned
           if (response.screenPoint) {
-            console.log(response.results[0]);
             queryFeatures(response.screenPoint, mallas.allSublayers.items[1]);
           }
         });
+      });
+
+      // listen for LateralPanel events
+      props.eventEmitter.on("message", function (text) {
+        const speciesGraphics =
+          text in speciesData
+            ? speciesData[text].map((tile) => ({
+                geometry: tileData[tile].polygon,
+                symbol: {
+                  type: "simple-fill",
+                  color: "#039962",
+                },
+              }))
+            : null;
+
+        graphicsLayer.removeAll();
+        speciesGraphics.map((graphic) => graphicsLayer.add(graphic));
+
+        // var graphicsLayer = new GraphicsLayer({ graphics: speciesGraphics });
+
+        webmap.add(graphicsLayer);
       });
 
       // ########## Search widget ##############

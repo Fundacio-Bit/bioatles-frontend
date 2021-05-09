@@ -5,38 +5,51 @@ import { Typography } from "antd";
 
 import Map from "./Map";
 import LateralPanel from "./LateralPanel";
+
+import speciesData from "../data/dummySpeciesData.json";
+
 import "./MainContainer.css";
 
 const { Title } = Typography;
 
+var EventEmitter = require("events");
+
 function MainContainer() {
   const [selectedTile, setSelectedTile] = useState(null);
-  const [selectedSpecies, setSelectedSpecies] = useState(0);
+  const [selectedSpecies, setSelectedSpecies] = useState(null);
+  const [viewZoom, setViewZoom] = useState(2);
+  const [viewExtent, setViewExtent] = useState(null);
+  const [displayedSpecies, setDisplayedSpecies] = useState(
+    Object.keys(speciesData)
+  );
+  const [displayedTiles, setDisplayedTiles] = useState(null);
 
-  const getPolygon = (speciesIndex) => {
-    const polygons = [
-      {
-        type: "polygon",
-        rings: [
-          [1.1554, 38.8794], //Longitude, latitude
-          [1.2134, 38.8798], //Longitude, latitude
-          [1.2134, 38.835], //Longitude, latitude
-          [1.1554, 38.835], //Longitude, latitude
-        ],
-      },
-    ];
-    return polygons[speciesIndex];
-  };
-
-  console.log("species", selectedSpecies);
-  console.log("polygon", getPolygon(selectedSpecies));
-  console.log("MYTILE", selectedTile);
+  /// ####### EVENTS MANAGEMENT ###########
+  //stackoverflow.com/questions/42802931/node-js-how-can-i-return-a-value-from-an-event-listener
+  var ee = new EventEmitter();
 
   const tileChangeHandler = (tileNr) => {
     setSelectedTile(tileNr);
   };
-  const speciesChangeHandler = (speciesNr) => {
-    setSelectedSpecies(speciesNr);
+  const selectedSpeciesChangeHandler = (species) => {
+    setSelectedSpecies(species);
+  };
+
+  const zoomChangeHandler = (zoomLevel) => {
+    setViewZoom(zoomLevel);
+  };
+
+  const extentChangeHandler = (extent) => {
+    setViewExtent(extent);
+  };
+
+  const displayedSpeciesChangeHandler = (speciesArray) => {
+    setDisplayedSpecies(speciesArray);
+  };
+
+  const displayedTilesChangeHandler = (tilesArray) => {
+    console.log("Tiles with species", tilesArray);
+    setDisplayedTiles(tilesArray);
   };
 
   return (
@@ -53,14 +66,23 @@ function MainContainer() {
           </Title>
           <LateralPanel
             tile={selectedTile}
-            speciesChangeHandler={speciesChangeHandler}
+            displayedSpecies={displayedSpecies}
+            selectedSpeciesChangeHandler={selectedSpeciesChangeHandler}
+            displayedTilesChangeHandler={displayedTilesChangeHandler}
+            eventEmitter={ee}
           ></LateralPanel>
         </Col>
         <Col span={18}>
           <Map
             tileChangeHandler={tileChangeHandler}
-            polygon={getPolygon(selectedSpecies)}
             selectedSpecies={selectedSpecies}
+            displayedTiles={displayedTiles}
+            displayedSpeciesChangeHandler={displayedSpeciesChangeHandler}
+            viewZoom={viewZoom}
+            viewExtent={viewExtent}
+            zoomChangeHandler={zoomChangeHandler}
+            extentChangeHandler={extentChangeHandler}
+            eventEmitter={ee}
           ></Map>
         </Col>
       </Row>
