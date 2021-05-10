@@ -1,6 +1,6 @@
 {
   "893": {
-    "species": ["Alytes muletensis", "Buffo buffotes"],
+    "species": ["alytes_muletensis", "buffo_buffotes"],
     "polygon": {
       "type": "polygon",
       "rings": [
@@ -12,7 +12,7 @@
     }
   },
   "894": {
-    "species": ["Buffo buffotes", "Buffo viridis"],
+    "species": ["buffo_buffotes", "buffo_viridis"],
     "polygon": {
       "type": "polygon",
       "rings": [

@@ -1,12 +1,12 @@
 import React from "react";
 import { EyeOutlined } from "@ant-design/icons";
 
-function LateralPanel(props) {
-  console.log("MySpecies", props.displayedSpecies);
+function LateralPanel({ displayedSpecies, selectedSpeciesChangeHandler }) {
+  console.log("MySpecies", displayedSpecies);
   return (
     <div>
-      {props.displayedSpecies &&
-        props.displayedSpecies.map((species) => (
+      {displayedSpecies &&
+        displayedSpecies.map((species) => (
           <div
             key={species.toLowerCase().replace(/\s/g, "_")}
             style={{ margin: 5 }}
@@ -15,7 +15,8 @@ function LateralPanel(props) {
             {species}
             <EyeOutlined
               style={{ margin: 5 }}
-              onClick={() => props.eventEmitter.emit("message", species)}
+              // onClick={() => props.eventEmitter.emit("message", species)}
+              onClick={() => selectedSpeciesChangeHandler(species)}
             ></EyeOutlined>
           </div>
         ))}
