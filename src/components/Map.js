@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import MapView from "@arcgis/core/views/MapView";
 import WebMap from "@arcgis/core/WebMap";
 import Search from "@arcgis/core/widgets/Search";
@@ -11,49 +11,67 @@ import speciesData from "../data/dummySpeciesData.json";
 // STATE SHOULD NOT BE MODIFIED: IT WOULD PRODUCE MAP RERENDERINGS AND THUS A BAD USER EXPERIENCE
 // https://stackoverflow.com/questions/62619741/update-state-without-re-rendering-arcgis-map
 
-function Map(props) {
+function Map({
+  tileChangeHandler,
+  selectedSpeciesChangeHandler,
+  selectedSpecies,
+  displayedSpeciesChangeHandler,
+}) {
+  const [webmap, setWebmap] = useState(null);
   const mapDiv = useRef(null);
 
   useEffect(() => {
-    if (mapDiv.current) {
-      /**
-       * Initialize application
-       */
-      const webmap = new WebMap({
-        portalItem: {
-          id: "884dd1c129b84c72a1db164c4fb85095",
-          portal: {
-            url: "https://portalideib.caib.es/portal",
-          },
+    console.log("use effect 1");
+    /**
+     * Initialize webmap
+     */
+    const webmap = new WebMap({
+      portalItem: {
+        id: "884dd1c129b84c72a1db164c4fb85095",
+        portal: {
+          url: "https://portalideib.caib.es/portal",
         },
-      });
+      },
+    });
 
-      webmap.infoWindow = null;
+    // TODO: tell SITIBSA to configure the webmap removing info windows
+    // remove default info window (which is predefined in the webmap delivered)
+    webmap.infoWindow = null;
 
+    // ################# INITIALIZE GRAPHICS LAYER ##############
+    // it must exist for later interaction
+    var graphicsLayer = new GraphicsLayer({
+      id: "bioatles-graphics",
+      graphics: null,
+    });
+
+    webmap.add(graphicsLayer);
+
+    setWebmap(webmap);
+  }, []);
+
+  useEffect(() => {
+    if (webmap) {
+      console.log("use effect 2");
       const view = new MapView({
         container: mapDiv.current,
         map: webmap,
-        zoom: props.viewZoom,
-        extent: props.viewExtent,
+        zoom: 2,
+        // zoom: viewZoom,
+        // extent: viewExtent,
       });
 
-      // ################# INITIALIZE GRAPHICS LAYER ##############
-      // it mus exist for later interaction
-      var graphicsLayer = new GraphicsLayer({ graphics: null });
-
-      webmap.add(graphicsLayer);
-
-      // ################# MAP INTERACTION ################
-      // Manage click events. Get grid tile id on click.
+      // ########## Search widget ##############
+      // Add a pre-built search widget
+      // locations and even addresses can be found using it.
+      const search = new Search({ view });
+      view.ui.add(search, "top-right");
 
       view.on("click", function (event) {
-        console.log("Zoom level", view.zoom, view.extent);
-        props.zoomChangeHandler(view.zoom);
-        props.extentChangeHandler(view.extent);
-
         //  get the layer that contains the features
         // it contains two sublayers in a list 0 --> 1x1 and 1 --> 5 x 5
         const mallas = webmap.findLayerById("GOIB_DistEspecies_IB_9660");
+        webmap.findLayerById("bioatles-graphics").removeAll();
 
         // this function makes a query to the 5x5 feature layer
         // uses a screen point (ccordinates) retrieved via click. It is intersected with the features to know
@@ -69,26 +87,28 @@ function Map(props) {
               outFields: ["*"],
             })
             .then((featureSet) => {
-              console.log("Webmap pre", webmap);
+              console.log(
+                "drawing tile",
+                tileData[featureSet.features[0].attributes["Q_CODI"]]
+              );
               var gra = {};
               gra.geometry =
                 tileData[featureSet.features[0].attributes["Q_CODI"]].polygon;
               gra.symbol = {
                 type: "simple-fill", // autocasts as new SimpleFillSymbol()
-                color: "#039962",
+                color: "blue",
               };
 
               // Add graphics when GraphicsLayer is constructed
-              graphicsLayer.removeAll();
-              graphicsLayer.add(gra);
 
-              props.displayedSpeciesChangeHandler(
+              webmap.findLayerById("bioatles-graphics").add(gra);
+              selectedSpeciesChangeHandler(null);
+
+              displayedSpeciesChangeHandler(
                 tileData[featureSet.features[0].attributes["Q_CODI"]].species
               );
 
-              props.tileChangeHandler(
-                featureSet.features[0].attributes["Q_CODI"]
-              );
+              tileChangeHandler(featureSet.features[0].attributes["Q_CODI"]);
             })
             .catch((error) => console.log("Query error", error));
         }
@@ -100,35 +120,34 @@ function Map(props) {
           }
         });
       });
-
-      // listen for LateralPanel events
-      props.eventEmitter.on("message", function (text) {
-        const speciesGraphics =
-          text in speciesData
-            ? speciesData[text].map((tile) => ({
-                geometry: tileData[tile].polygon,
-                symbol: {
-                  type: "simple-fill",
-                  color: "#039962",
-                },
-              }))
-            : null;
-
-        graphicsLayer.removeAll();
-        speciesGraphics.map((graphic) => graphicsLayer.add(graphic));
-
-        // var graphicsLayer = new GraphicsLayer({ graphics: speciesGraphics });
-
-        webmap.add(graphicsLayer);
-      });
-
-      // ########## Search widget ##############
-      // Add a pre-built search widget
-      // locations and even addresses can be found using it.
-      const search = new Search({ view });
-      view.ui.add(search, "top-right");
     }
-  }, []);
+  }, [webmap]);
+
+  // view does not update on tile click!!!
+
+  // Update when the selectedSpecies prop changes
+  // the webmap and view are not rerendered because they are not dependencies of the corresponding useEffect that creates them.
+  if (webmap) {
+    console.log("rendering");
+    const speciesGraphics =
+      selectedSpecies in speciesData
+        ? speciesData[selectedSpecies].map((tile) => ({
+            geometry: tileData[tile].polygon,
+            symbol: {
+              type: "simple-fill",
+              color: "#039962",
+            },
+          }))
+        : null;
+
+    if (speciesGraphics) {
+      webmap.findLayerById("bioatles-graphics").removeAll();
+      console.log("drawing species distribution tiles", selectedSpecies);
+      speciesGraphics.map((graphic) =>
+        webmap.findLayerById("bioatles-graphics").add(graphic)
+      );
+    }
+  }
 
   return <div id="mapDiv" ref={mapDiv}></div>;
 }

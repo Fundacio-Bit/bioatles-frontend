@@ -12,21 +12,21 @@ import "./MainContainer.css";
 
 const { Title } = Typography;
 
-var EventEmitter = require("events");
+// var EventEmitter = require("events");
 
 function MainContainer() {
   const [selectedTile, setSelectedTile] = useState(null);
   const [selectedSpecies, setSelectedSpecies] = useState(null);
-  const [viewZoom, setViewZoom] = useState(2);
-  const [viewExtent, setViewExtent] = useState(null);
+  // const [viewZoom, setViewZoom] = useState(2);
+  // const [viewExtent, setViewExtent] = useState(null);
   const [displayedSpecies, setDisplayedSpecies] = useState(
     Object.keys(speciesData)
   );
-  const [displayedTiles, setDisplayedTiles] = useState(null);
+  // const [displayedTiles, setDisplayedTiles] = useState(null);
 
   /// ####### EVENTS MANAGEMENT ###########
   //stackoverflow.com/questions/42802931/node-js-how-can-i-return-a-value-from-an-event-listener
-  var ee = new EventEmitter();
+  // var ee = new EventEmitter();
 
   const tileChangeHandler = (tileNr) => {
     setSelectedTile(tileNr);
@@ -35,22 +35,22 @@ function MainContainer() {
     setSelectedSpecies(species);
   };
 
-  const zoomChangeHandler = (zoomLevel) => {
-    setViewZoom(zoomLevel);
-  };
+  // const zoomChangeHandler = (zoomLevel) => {
+  //   setViewZoom(zoomLevel);
+  // };
 
-  const extentChangeHandler = (extent) => {
-    setViewExtent(extent);
-  };
+  // const extentChangeHandler = (extent) => {
+  //   setViewExtent(extent);
+  // };
 
   const displayedSpeciesChangeHandler = (speciesArray) => {
     setDisplayedSpecies(speciesArray);
   };
 
-  const displayedTilesChangeHandler = (tilesArray) => {
-    console.log("Tiles with species", tilesArray);
-    setDisplayedTiles(tilesArray);
-  };
+  // const displayedTilesChangeHandler = (tilesArray) => {
+  //   console.log("Tiles with species", tilesArray);
+  //   setDisplayedTiles(tilesArray);
+  // };
 
   return (
     <>
@@ -68,21 +68,14 @@ function MainContainer() {
             tile={selectedTile}
             displayedSpecies={displayedSpecies}
             selectedSpeciesChangeHandler={selectedSpeciesChangeHandler}
-            displayedTilesChangeHandler={displayedTilesChangeHandler}
-            eventEmitter={ee}
           ></LateralPanel>
         </Col>
         <Col span={18}>
           <Map
             tileChangeHandler={tileChangeHandler}
+            selectedSpeciesChangeHandler={selectedSpeciesChangeHandler}
             selectedSpecies={selectedSpecies}
-            displayedTiles={displayedTiles}
             displayedSpeciesChangeHandler={displayedSpeciesChangeHandler}
-            viewZoom={viewZoom}
-            viewExtent={viewExtent}
-            zoomChangeHandler={zoomChangeHandler}
-            extentChangeHandler={extentChangeHandler}
-            eventEmitter={ee}
           ></Map>
         </Col>
       </Row>
