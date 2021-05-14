@@ -12,46 +12,24 @@ import "./MainContainer.css";
 
 const { Title } = Typography;
 
-// var EventEmitter = require("events");
-
-function MainContainer() {
-  const [selectedTile, setSelectedTile] = useState(null);
+const MainContainer = () => {
+  // ###### STATES AND HANDLERS  #####
   const [selectedSpecies, setSelectedSpecies] = useState(null);
-  // const [viewZoom, setViewZoom] = useState(2);
-  // const [viewExtent, setViewExtent] = useState(null);
   const [displayedSpecies, setDisplayedSpecies] = useState(
     Object.keys(speciesData)
   );
-  // const [displayedTiles, setDisplayedTiles] = useState(null);
 
-  /// ####### EVENTS MANAGEMENT ###########
-  //stackoverflow.com/questions/42802931/node-js-how-can-i-return-a-value-from-an-event-listener
-  // var ee = new EventEmitter();
-
-  const tileChangeHandler = (tileNr) => {
-    setSelectedTile(tileNr);
-  };
+  // Handlers are passed to child components.
+  // Child comps will be able to update the state of the MainContainer (parent) when some actions are triggered withim them.
   const selectedSpeciesChangeHandler = (species) => {
     setSelectedSpecies(species);
   };
-
-  // const zoomChangeHandler = (zoomLevel) => {
-  //   setViewZoom(zoomLevel);
-  // };
-
-  // const extentChangeHandler = (extent) => {
-  //   setViewExtent(extent);
-  // };
 
   const displayedSpeciesChangeHandler = (speciesArray) => {
     setDisplayedSpecies(speciesArray);
   };
 
-  // const displayedTilesChangeHandler = (tilesArray) => {
-  //   console.log("Tiles with species", tilesArray);
-  //   setDisplayedTiles(tilesArray);
-  // };
-
+  // ###### COMPONENT RENDERING (JSX)  #####
   return (
     <>
       <Row className="header">
@@ -65,14 +43,12 @@ function MainContainer() {
             Espècies
           </Title>
           <LateralPanel
-            tile={selectedTile}
             displayedSpecies={displayedSpecies}
             selectedSpeciesChangeHandler={selectedSpeciesChangeHandler}
           ></LateralPanel>
         </Col>
         <Col span={18}>
           <Map
-            tileChangeHandler={tileChangeHandler}
             selectedSpeciesChangeHandler={selectedSpeciesChangeHandler}
             selectedSpecies={selectedSpecies}
             displayedSpeciesChangeHandler={displayedSpeciesChangeHandler}
@@ -81,6 +57,6 @@ function MainContainer() {
       </Row>
     </>
   );
-}
+};
 
 export default MainContainer;
