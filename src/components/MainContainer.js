@@ -73,6 +73,7 @@ function MainContainer() {
         <Col span={18}>
           <Map
             tileChangeHandler={tileChangeHandler}
+            selectedSpeciesChangeHandler={selectedSpeciesChangeHandler}
             selectedSpecies={selectedSpecies}
             displayedSpeciesChangeHandler={displayedSpeciesChangeHandler}
           ></Map>

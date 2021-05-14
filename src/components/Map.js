@@ -13,6 +13,7 @@ import speciesData from "../data/dummySpeciesData.json";
 
 function Map({
   tileChangeHandler,
+  selectedSpeciesChangeHandler,
   selectedSpecies,
   displayedSpeciesChangeHandler,
 }) {
@@ -20,6 +21,7 @@ function Map({
   const mapDiv = useRef(null);
 
   useEffect(() => {
+    console.log("use effect 1");
     /**
      * Initialize webmap
      */
@@ -49,73 +51,84 @@ function Map({
   }, []);
 
   useEffect(() => {
-    const view = new MapView({
-      container: mapDiv.current,
-      map: webmap,
-      zoom: 2,
-      // zoom: viewZoom,
-      // extent: viewExtent,
-    });
-
-    // ########## Search widget ##############
-    // Add a pre-built search widget
-    // locations and even addresses can be found using it.
-    const search = new Search({ view });
-    view.ui.add(search, "top-right");
-
-    view.on("click", function (event) {
-      //  get the layer that contains the features
-      // it contains two sublayers in a list 0 --> 1x1 and 1 --> 5 x 5
-      const mallas = webmap.findLayerById("GOIB_DistEspecies_IB_9660");
-
-      // this function makes a query to the 5x5 feature layer
-      // uses a screen point (ccordinates) retrieved via click. It is intersected with the features to know
-      // which one is found at that point.
-      // The attributes of this feature contain the information required (i.e. the grid tile number)
-      function queryFeatures(screenPoint, layer) {
-        const point = view.toMap(screenPoint);
-        layer
-          .queryFeatures({
-            geometry: point,
-            spatialRelationship: "intersects",
-            returnGeometry: false,
-            outFields: ["*"],
-          })
-          .then((featureSet) => {
-            var gra = {};
-            gra.geometry =
-              tileData[featureSet.features[0].attributes["Q_CODI"]].polygon;
-            gra.symbol = {
-              type: "simple-fill", // autocasts as new SimpleFillSymbol()
-              color: "#039962",
-            };
-
-            // Add graphics when GraphicsLayer is constructed
-            webmap.findLayerById("bioatles-graphics").removeAll();
-            webmap.findLayerById("bioatles-graphics").add(gra);
-
-            displayedSpeciesChangeHandler(
-              tileData[featureSet.features[0].attributes["Q_CODI"]].species
-            );
-
-            tileChangeHandler(featureSet.features[0].attributes["Q_CODI"]);
-          })
-          .catch((error) => console.log("Query error", error));
-      }
-
-      view.hitTest(event).then(function (response) {
-        // check if a feature is returned
-        if (response.screenPoint) {
-          queryFeatures(response.screenPoint, mallas.allSublayers.items[1]);
-        }
+    if (webmap) {
+      console.log("use effect 2");
+      const view = new MapView({
+        container: mapDiv.current,
+        map: webmap,
+        zoom: 2,
+        // zoom: viewZoom,
+        // extent: viewExtent,
       });
-    });
-    // setView(view);
+
+      // ########## Search widget ##############
+      // Add a pre-built search widget
+      // locations and even addresses can be found using it.
+      const search = new Search({ view });
+      view.ui.add(search, "top-right");
+
+      view.on("click", function (event) {
+        //  get the layer that contains the features
+        // it contains two sublayers in a list 0 --> 1x1 and 1 --> 5 x 5
+        const mallas = webmap.findLayerById("GOIB_DistEspecies_IB_9660");
+        webmap.findLayerById("bioatles-graphics").removeAll();
+
+        // this function makes a query to the 5x5 feature layer
+        // uses a screen point (ccordinates) retrieved via click. It is intersected with the features to know
+        // which one is found at that point.
+        // The attributes of this feature contain the information required (i.e. the grid tile number)
+        function queryFeatures(screenPoint, layer) {
+          const point = view.toMap(screenPoint);
+          layer
+            .queryFeatures({
+              geometry: point,
+              spatialRelationship: "intersects",
+              returnGeometry: false,
+              outFields: ["*"],
+            })
+            .then((featureSet) => {
+              console.log(
+                "drawing tile",
+                tileData[featureSet.features[0].attributes["Q_CODI"]]
+              );
+              var gra = {};
+              gra.geometry =
+                tileData[featureSet.features[0].attributes["Q_CODI"]].polygon;
+              gra.symbol = {
+                type: "simple-fill", // autocasts as new SimpleFillSymbol()
+                color: "blue",
+              };
+
+              // Add graphics when GraphicsLayer is constructed
+
+              webmap.findLayerById("bioatles-graphics").add(gra);
+              selectedSpeciesChangeHandler(null);
+
+              displayedSpeciesChangeHandler(
+                tileData[featureSet.features[0].attributes["Q_CODI"]].species
+              );
+
+              tileChangeHandler(featureSet.features[0].attributes["Q_CODI"]);
+            })
+            .catch((error) => console.log("Query error", error));
+        }
+
+        view.hitTest(event).then(function (response) {
+          // check if a feature is returned
+          if (response.screenPoint) {
+            queryFeatures(response.screenPoint, mallas.allSublayers.items[1]);
+          }
+        });
+      });
+    }
   }, [webmap]);
+
+  // view does not update on tile click!!!
 
   // Update when the selectedSpecies prop changes
   // the webmap and view are not rerendered because they are not dependencies of the corresponding useEffect that creates them.
   if (webmap) {
+    console.log("rendering");
     const speciesGraphics =
       selectedSpecies in speciesData
         ? speciesData[selectedSpecies].map((tile) => ({
@@ -127,8 +140,9 @@ function Map({
           }))
         : null;
 
-    webmap.findLayerById("bioatles-graphics").removeAll();
     if (speciesGraphics) {
+      webmap.findLayerById("bioatles-graphics").removeAll();
+      console.log("drawing species distribution tiles", selectedSpecies);
       speciesGraphics.map((graphic) =>
         webmap.findLayerById("bioatles-graphics").add(graphic)
       );
