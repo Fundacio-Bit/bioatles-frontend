@@ -25,7 +25,7 @@ npm install
 Once finished the installation of all packages type:
 
 ```
-npm install
+npm start
 ```
 
 This command will run the app in the development mode.
