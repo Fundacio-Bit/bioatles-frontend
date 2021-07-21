@@ -16,6 +16,18 @@ Proof of concept: integration of Bioatles GIS layers in a React Component using 
 
 You only need [NodeJS](https://nodejs.dev/) to execute this app on a local server.
 
+Add a file called ".env" in your project root and add the folloeing variable:
+
+For production mode, to deploy in JBoss:
+
+REACT_APP_ROUTER_BASE=/serproes-front
+
+For development mode:
+
+REACT_APP_ROUTER_BASE=
+
+
+
 Once installed open a console, go to the project folder and run:
 
 ```
