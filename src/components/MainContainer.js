@@ -15,6 +15,7 @@ const { Title } = Typography;
 const MainContainer = () => {
   // ###### STATES AND HANDLERS  #####
   const [selectedSpecies, setSelectedSpecies] = useState(null);
+  const [displayedTiles, setDisplayedTiles] = useState(null);
   const [displayedSpecies, setDisplayedSpecies] = useState(
     Object.keys(speciesData)
   );
@@ -27,6 +28,10 @@ const MainContainer = () => {
 
   const displayedSpeciesChangeHandler = (speciesArray) => {
     setDisplayedSpecies(speciesArray);
+  };
+
+  const displayedTilesChangeHandler = (tilesArray) => {
+    setDisplayedTiles(tilesArray);
   };
 
   // ###### COMPONENT RENDERING (JSX)  #####
@@ -43,14 +48,16 @@ const MainContainer = () => {
             Espècies
           </Title>
           <LateralPanel
-            displayedSpecies={displayedSpecies}
+            // displayedSpecies={displayedSpecies}
             selectedSpeciesChangeHandler={selectedSpeciesChangeHandler}
+            displayedTilesChangeHandler={displayedTilesChangeHandler}
           ></LateralPanel>
         </Col>
         <Col span={18}>
           <Map
-            selectedSpeciesChangeHandler={selectedSpeciesChangeHandler}
             selectedSpecies={selectedSpecies}
+            displayedTiles={displayedTiles}
+            selectedSpeciesChangeHandler={selectedSpeciesChangeHandler}
             displayedSpeciesChangeHandler={displayedSpeciesChangeHandler}
           ></Map>
         </Col>

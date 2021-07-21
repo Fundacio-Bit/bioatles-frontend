@@ -4,10 +4,10 @@
     "polygon": {
       "type": "polygon",
       "rings": [
-        [1.1554, 38.8794],
-        [1.2134, 38.8798],
-        [1.2134, 38.835],
-        [1.1554, 38.835]
+        [1.1555, 38.8803],
+        [1.2131, 38.8812],
+        [1.214, 38.8362],
+        [1.1566, 38.8352]
       ]
     }
   },
@@ -16,10 +16,659 @@
     "polygon": {
       "type": "polygon",
       "rings": [
-        [1.27, 38.8809],
-        [1.2134, 38.8798],
-        [1.2134, 38.835],
-        [1.27, 38.835]
+        [1.2128, 38.8803],
+        [1.2704, 38.8812],
+        [1.2713, 38.8362],
+        [1.2139, 38.8352]
+      ]
+    }
+  },
+  "903": {
+    "species": ["buffo_buffotes", "buffo_viridis"],
+    "polygon": {
+      "type": "polygon",
+      "rings": [
+        [1.2701, 38.8803],
+        [1.3277, 38.8812],
+        [1.3286, 38.8362],
+        [1.2712, 38.8352]
+      ]
+    }
+  },
+  "904": {
+    "species": ["buffo_buffotes", "buffo_viridis"],
+    "polygon": {
+      "type": "polygon",
+      "rings": [
+        [1.3274, 38.8803],
+        [1.385, 38.8812],
+        [1.3859, 38.8362],
+        [1.3285, 38.8352]
+      ]
+    }
+  },
+  "913": {
+    "species": ["buffo_buffotes", "buffo_viridis"],
+    "polygon": {
+      "type": "polygon",
+      "rings": [
+        [1.3847, 38.8813],
+        [1.4423, 38.8822],
+        [1.4432, 38.8372],
+        [1.3858, 38.8362]
+      ]
+    }
+  },
+  "892": {
+    "species": ["buffo_buffotes", "buffo_viridis"],
+    "polygon": {
+      "type": "polygon",
+      "rings": [
+        [1.2128, 38.9256],
+        [1.2704, 38.9265],
+        [1.2713, 38.8815],
+        [1.2139, 38.8805]
+      ]
+    }
+  },
+  "901": {
+    "species": ["buffo_buffotes", "buffo_viridis"],
+    "polygon": {
+      "type": "polygon",
+      "rings": [
+        [1.2701, 38.9266],
+        [1.3277, 38.9275],
+        [1.3286, 38.8825],
+        [1.2712, 38.8815]
+      ]
+    }
+  },
+  "902": {
+    "species": ["buffo_buffotes", "buffo_viridis"],
+    "polygon": {
+      "type": "polygon",
+      "rings": [
+        [1.3274, 38.9266],
+        [1.385, 38.9275],
+        [1.3859, 38.8825],
+        [1.3285, 38.8815]
+      ]
+    }
+  },
+  "911": {
+    "species": ["buffo_buffotes", "buffo_viridis"],
+    "polygon": {
+      "type": "polygon",
+      "rings": [
+        [1.3847, 38.9266],
+        [1.4423, 38.9275],
+        [1.4432, 38.8825],
+        [1.3858, 38.8815]
+      ]
+    }
+  },
+  "912": {
+    "species": ["buffo_buffotes", "buffo_viridis"],
+    "polygon": {
+      "type": "polygon",
+      "rings": [
+        [1.442, 38.9266],
+        [1.4996, 38.9275],
+        [1.5005, 38.8825],
+        [1.4431, 38.8815]
+      ]
+    }
+  },
+
+  "853": {
+    "species": ["buffo_buffotes", "buffo_viridis"],
+    "polygon": {
+      "type": "polygon",
+      "rings": [
+        [1.1535, 38.9699],
+        [1.2101, 38.9708],
+        [1.211, 38.9258],
+        [1.1536, 38.9248]
+      ]
+    }
+  },
+  "854": {
+    "species": ["buffo_buffotes", "buffo_viridis"],
+    "polygon": {
+      "type": "polygon",
+      "rings": [
+        [1.2118, 38.9709],
+        [1.2694, 38.9718],
+        [1.2703, 38.9268],
+        [1.2129, 38.9258]
+      ]
+    }
+  },
+  "863": {
+    "species": ["buffo_buffotes", "buffo_viridis"],
+    "polygon": {
+      "type": "polygon",
+      "rings": [
+        [1.2691, 38.9719],
+        [1.3267, 38.9728],
+        [1.3276, 38.9278],
+        [1.2702, 38.9268]
+      ]
+    }
+  },
+  "864": {
+    "species": ["buffo_buffotes", "buffo_viridis"],
+    "polygon": {
+      "type": "polygon",
+      "rings": [
+        [1.3274, 38.9719],
+        [1.385, 38.9728],
+        [1.3859, 38.9278],
+        [1.3285, 38.9268]
+      ]
+    }
+  },
+  "873": {
+    "species": ["buffo_buffotes", "buffo_viridis"],
+    "polygon": {
+      "type": "polygon",
+      "rings": [
+        [1.3847, 38.9719],
+        [1.4423, 38.9728],
+        [1.4432, 38.9278],
+        [1.3858, 38.9268]
+      ]
+    }
+  },
+  "874": {
+    "species": ["buffo_buffotes", "buffo_viridis"],
+    "polygon": {
+      "type": "polygon",
+      "rings": [
+        [1.442, 38.9739],
+        [1.4996, 38.9748],
+        [1.5005, 38.9298],
+        [1.4431, 38.9288]
+      ]
+    }
+  },
+  "883": {
+    "species": ["buffo_buffotes", "buffo_viridis"],
+    "polygon": {
+      "type": "polygon",
+      "rings": [
+        [1.4993, 38.9749],
+        [1.5569, 38.9758],
+        [1.5578, 38.9308],
+        [1.5004, 38.9298]
+      ]
+    }
+  },
+  "851": {
+    "species": ["buffo_buffotes", "buffo_viridis"],
+    "polygon": {
+      "type": "polygon",
+      "rings": [
+        [1.1525, 39.0142],
+        [1.2099, 39.0151],
+        [1.211, 38.9701],
+        [1.1536, 38.9691]
+      ]
+    }
+  },
+  "852": {
+    "species": ["buffo_buffotes", "buffo_viridis"],
+    "polygon": {
+      "type": "polygon",
+      "rings": [
+        [1.2098, 39.0152],
+        [1.2672, 39.0161],
+        [1.2683, 38.9711],
+        [1.2109, 38.9701]
+      ]
+    }
+  },
+  "861": {
+    "species": ["buffo_buffotes", "buffo_viridis"],
+    "polygon": {
+      "type": "polygon",
+      "rings": [
+        [1.2671, 39.0152],
+        [1.3245, 39.0161],
+        [1.3256, 38.9711],
+        [1.2682, 38.9701]
+      ]
+    }
+  },
+  "862": {
+    "species": ["buffo_buffotes", "buffo_viridis"],
+    "polygon": {
+      "type": "polygon",
+      "rings": [
+        [1.3244, 39.0172],
+        [1.3818, 39.0181],
+        [1.3829, 38.9731],
+        [1.3255, 38.9721]
+      ]
+    }
+  },
+  "871": {
+    "species": ["buffo_buffotes", "buffo_viridis"],
+    "polygon": {
+      "type": "polygon",
+      "rings": [
+        [1.3827, 39.0172],
+        [1.4401, 39.0181],
+        [1.4412, 38.9731],
+        [1.3838, 38.9721]
+      ]
+    }
+  },
+  "872": {
+    "species": ["buffo_buffotes", "buffo_viridis"],
+    "polygon": {
+      "type": "polygon",
+      "rings": [
+        [1.44, 39.0182],
+        [1.4974, 39.0191],
+        [1.4985, 38.9741],
+        [1.4411, 38.9731]
+      ]
+    }
+  },
+  "881": {
+    "species": ["buffo_buffotes", "buffo_viridis"],
+    "polygon": {
+      "type": "polygon",
+      "rings": [
+        [1.4983, 39.0192],
+        [1.5557, 39.0201],
+        [1.5568, 38.9751],
+        [1.4994, 38.9741]
+      ]
+    }
+  },
+  "882": {
+    "species": ["buffo_buffotes", "buffo_viridis"],
+    "polygon": {
+      "type": "polygon",
+      "rings": [
+        [1.5556, 39.0192],
+        [1.613, 39.0201],
+        [1.6151, 38.9751],
+        [1.5567, 38.9741]
+      ]
+    }
+  },
+  "813": {
+    "species": ["buffo_buffotes", "buffo_viridis"],
+    "polygon": {
+      "type": "polygon",
+      "rings": [
+        [1.2671, 39.0605],
+        [1.3245, 39.0614],
+        [1.3256, 39.0164],
+        [1.2682, 39.0154]
+      ]
+    }
+  },
+  "814": {
+    "species": ["buffo_buffotes", "buffo_viridis"],
+    "polygon": {
+      "type": "polygon",
+      "rings": [
+        [1.3244, 39.0615],
+        [1.3818, 39.0624],
+        [1.3829, 39.0174],
+        [1.3255, 39.0164]
+      ]
+    }
+  },
+  "823": {
+    "species": ["buffo_buffotes", "buffo_viridis"],
+    "polygon": {
+      "type": "polygon",
+      "rings": [
+        [1.3817, 39.0625],
+        [1.4391, 39.0634],
+        [1.4402, 39.0184],
+        [1.3828, 39.0174]
+      ]
+    }
+  },
+  "824": {
+    "species": ["buffo_buffotes", "buffo_viridis"],
+    "polygon": {
+      "type": "polygon",
+      "rings": [
+        [1.439, 39.0635],
+        [1.4964, 39.0644],
+        [1.4975, 39.0194],
+        [1.4401, 39.0184]
+      ]
+    }
+  },
+  "833": {
+    "species": ["buffo_buffotes", "buffo_viridis"],
+    "polygon": {
+      "type": "polygon",
+      "rings": [
+        [1.4963, 39.0635],
+        [1.5537, 39.0644],
+        [1.5548, 39.0194],
+        [1.4974, 39.0184]
+      ]
+    }
+  },
+  "834": {
+    "species": ["buffo_buffotes", "buffo_viridis"],
+    "polygon": {
+      "type": "polygon",
+      "rings": [
+        [1.5536, 39.0645],
+        [1.611, 39.0654],
+        [1.6121, 39.0204],
+        [1.5547, 39.0194]
+      ]
+    }
+  },
+  "843": {
+    "species": ["buffo_buffotes", "buffo_viridis"],
+    "polygon": {
+      "type": "polygon",
+      "rings": [
+        [1.6109, 39.0655],
+        [1.6683, 39.0664],
+        [1.6694, 39.0214],
+        [1.612, 39.0214]
+      ]
+    }
+  },
+  "812": {
+    "species": ["buffo_buffotes", "buffo_viridis"],
+    "polygon": {
+      "type": "polygon",
+      "rings": [
+        [1.3234, 39.1068],
+        [1.3808, 39.1076],
+        [1.3819, 39.0627],
+        [1.3245, 39.0617]
+      ]
+    }
+  },
+  "821": {
+    "species": ["buffo_buffotes", "buffo_viridis"],
+    "polygon": {
+      "type": "polygon",
+      "rings": [
+        [1.3807, 39.1078],
+        [1.4381, 39.1086],
+        [1.4392, 39.0637],
+        [1.3818, 39.0627]
+      ]
+    }
+  },
+  "822": {
+    "species": ["buffo_buffotes", "buffo_viridis"],
+    "polygon": {
+      "type": "polygon",
+      "rings": [
+        [1.438, 39.1078],
+        [1.4954, 39.1086],
+        [1.4965, 39.0637],
+        [1.4391, 39.0627]
+      ]
+    }
+  },
+  "831": {
+    "species": ["buffo_buffotes", "buffo_viridis"],
+    "polygon": {
+      "type": "polygon",
+      "rings": [
+        [1.4953, 39.1088],
+        [1.5527, 39.1096],
+        [1.5538, 39.0647],
+        [1.4964, 39.0637]
+      ]
+    }
+  },
+  "832": {
+    "species": ["buffo_buffotes", "buffo_viridis"],
+    "polygon": {
+      "type": "polygon",
+      "rings": [
+        [1.5536, 39.1098],
+        [1.611, 39.1106],
+        [1.6121, 39.0657],
+        [1.5547, 39.0647]
+      ]
+    }
+  },
+  "794": {
+    "species": ["buffo_buffotes", "buffo_viridis"],
+    "polygon": {
+      "type": "polygon",
+      "rings": [
+        [1.438, 39.1541],
+        [1.4954, 39.1549],
+        [1.4965, 39.11],
+        [1.4391, 39.109]
+      ]
+    }
+  },
+  "803": {
+    "species": ["buffo_buffotes", "buffo_viridis"],
+    "polygon": {
+      "type": "polygon",
+      "rings": [
+        [1.4953, 39.1541],
+        [1.5527, 39.1549],
+        [1.5538, 39.11],
+        [1.4964, 39.109]
+      ]
+    }
+  },
+  "922": {
+    "species": ["buffo_buffotes", "buffo_viridis"],
+    "polygon": {
+      "type": "polygon",
+      "rings": [
+        [1.3294, 38.8373],
+        [1.3861, 38.8379],
+        [1.3879, 38.7929],
+        [1.3305, 38.7919]
+      ]
+    }
+  },
+  "931": {
+    "species": ["buffo_buffotes", "buffo_viridis"],
+    "polygon": {
+      "type": "polygon",
+      "rings": [
+        [1.3867, 38.8373],
+        [1.4434, 38.8379],
+        [1.4452, 38.7929],
+        [1.3878, 38.7919]
+      ]
+    }
+  },
+  "932": {
+    "species": ["buffo_buffotes", "buffo_viridis"],
+    "polygon": {
+      "type": "polygon",
+      "rings": [
+        [1.444, 38.8383],
+        [1.5007, 38.8389],
+        [1.5025, 38.7939],
+        [1.4451, 38.7929]
+      ]
+    }
+  },
+  "933": {
+    "species": ["buffo_buffotes", "buffo_viridis"],
+    "polygon": {
+      "type": "polygon",
+      "rings": [
+        [1.3877, 38.793],
+        [1.4444, 38.7936],
+        [1.4462, 38.7486],
+        [1.3888, 38.7476]
+      ]
+    }
+  },
+  "934": {
+    "species": ["buffo_buffotes", "buffo_viridis"],
+    "polygon": {
+      "type": "polygon",
+      "rings": [
+        [1.445, 38.793],
+        [1.5017, 38.7936],
+        [1.5035, 38.7486],
+        [1.4461, 38.7476]
+      ]
+    }
+  },
+  "942": {
+    "species": ["buffo_buffotes", "buffo_viridis"],
+    "polygon": {
+      "type": "polygon",
+      "rings": [
+        [1.3324, 38.7467],
+        [1.3881, 38.7473],
+        [1.3899, 38.7023],
+        [1.3325, 38.7013]
+      ]
+    }
+  },
+  "951": {
+    "species": ["buffo_buffotes", "buffo_viridis"],
+    "polygon": {
+      "type": "polygon",
+      "rings": [
+        [1.3887, 38.7477],
+        [1.4454, 38.7483],
+        [1.4472, 38.7033],
+        [1.3898, 38.7023]
+      ]
+    }
+  },
+  "952": {
+    "species": ["buffo_buffotes", "buffo_viridis"],
+    "polygon": {
+      "type": "polygon",
+      "rings": [
+        [1.446, 38.7487],
+        [1.5027, 38.7493],
+        [1.5045, 38.7043],
+        [1.4471, 38.7033]
+      ]
+    }
+  },
+  "944": {
+    "species": ["buffo_buffotes", "buffo_viridis"],
+    "polygon": {
+      "type": "polygon",
+      "rings": [
+        [1.3324, 38.7014],
+        [1.3891, 38.702],
+        [1.3909, 38.657],
+        [1.3335, 38.656]
+      ]
+    }
+  },
+  "953": {
+    "species": ["buffo_buffotes", "buffo_viridis"],
+    "polygon": {
+      "type": "polygon",
+      "rings": [
+        [1.3907, 38.7024],
+        [1.4474, 38.703],
+        [1.4492, 38.658],
+        [1.3918, 38.657]
+      ]
+    }
+  },
+  "954": {
+    "species": ["buffo_buffotes", "buffo_viridis"],
+    "polygon": {
+      "type": "polygon",
+      "rings": [
+        [1.448, 38.7034],
+        [1.5047, 38.704],
+        [1.5065, 38.659],
+        [1.4491, 38.658]
+      ]
+    }
+  },
+  "963": {
+    "species": ["buffo_buffotes", "buffo_viridis"],
+    "polygon": {
+      "type": "polygon",
+      "rings": [
+        [1.5053, 38.7044],
+        [1.562, 38.705],
+        [1.5638, 38.66],
+        [1.5064, 38.659]
+      ]
+    }
+  },
+  "964": {
+    "species": ["buffo_buffotes", "buffo_viridis"],
+    "polygon": {
+      "type": "polygon",
+      "rings": [
+        [1.5626, 38.7054],
+        [1.6193, 38.706],
+        [1.6211, 38.661],
+        [1.5637, 38.66]
+      ]
+    }
+  },
+  "972": {
+    "species": ["buffo_buffotes", "buffo_viridis"],
+    "polygon": {
+      "type": "polygon",
+      "rings": [
+        [1.3334, 38.6571],
+        [1.3901, 38.6577],
+        [1.3919, 38.6127],
+        [1.3345, 38.6117]
+      ]
+    }
+  },
+  "981": {
+    "species": ["buffo_buffotes", "buffo_viridis"],
+    "polygon": {
+      "type": "polygon",
+      "rings": [
+        [1.3907, 38.6581],
+        [1.4474, 38.6587],
+        [1.4492, 38.6137],
+        [1.3918, 38.6127]
+      ]
+    }
+  },
+  "991": {
+    "species": ["buffo_buffotes", "buffo_viridis"],
+    "polygon": {
+      "type": "polygon",
+      "rings": [
+        [1.5053, 38.6581],
+        [1.562, 38.6587],
+        [1.5638, 38.6137],
+        [1.5064, 38.6127]
+      ]
+    }
+  },
+  "992": {
+    "species": ["buffo_buffotes", "buffo_viridis"],
+    "polygon": {
+      "type": "polygon",
+      "rings": [
+        [1.5626, 38.6581],
+        [1.6193, 38.6587],
+        [1.6211, 38.6137],
+        [1.5637, 38.6127]
       ]
     }
   }
