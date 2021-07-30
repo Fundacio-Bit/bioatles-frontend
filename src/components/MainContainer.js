@@ -12,7 +12,7 @@ import "./MainContainer.css";
 
 const { Title } = Typography;
 
-const MainContainer = () => {
+const MainContainer = ( {logoutHandler, username} ) => {
   // ###### STATES AND HANDLERS  #####
   const [selectedSpecies, setSelectedSpecies] = useState(null);
   const [displayedTiles, setDisplayedTiles] = useState(null);
@@ -38,8 +38,14 @@ const MainContainer = () => {
   return (
     <>
       <Row className="header">
-        <Col span={24}>
+        <Col span={20}>
           <Title className="header-title">Bioatles</Title>
+        </Col>
+        <Col span={2} style={{alignSelf: "center"}}>
+          <div><b>Benvingut <span style={{color: "#039962", fontSize: 20}}>{username}</span> </b></div>
+        </Col>
+        <Col span={2} style={{alignSelf: "center"}}>
+          <button className="w3-btn w3-red" style={{ borderRadius: 8, color: "white", backgroundColor: "#A63A04", border: "none", fontSize: 20 }} onClick={ () => logoutHandler() }>Logout</button>
         </Col>
       </Row>
       <Row>
