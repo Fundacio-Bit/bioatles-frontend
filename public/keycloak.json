@@ -2,7 +2,7 @@
     "realm": "GOIB",
     "auth-server-url": "http://localhost:8180/auth",
     "ssl-required": "external",
-    "resource": "clientid-03",
+    "resource": "goib-default",
     "public-client": true,
     "confidential-port": 0
   }

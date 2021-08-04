@@ -9,6 +9,7 @@ import "./App.css";
 
 const App = () => {
 
+  console.log("window.location.hostname: ", window.location.hostname)
   // ###### STATES AND HANDLERS  #####
   const [keycloak, setKeycloak] = useState(null);
   const [authenticated, setAuthenticated] = useState(null);
