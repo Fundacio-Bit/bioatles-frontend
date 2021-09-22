@@ -41,3 +41,8 @@ You can open [http://localhost:3000](http://localhost:3000) to view it in the br
 
 The page will reload if you make code edits.
 You will also see any lint errors in the console.
+
+## Documentation
+
+[Keycloak Javascript Adapter](https://github.com/keycloak/keycloak-documentation/blob/master/securing_apps/topics/oidc/javascript-adapter.adoc     )
+
